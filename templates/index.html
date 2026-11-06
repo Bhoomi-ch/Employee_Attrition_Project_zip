@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Attrition Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>Employee Attrition Analysis</h1>
+        <p>Employee Data Exploration Dashboard</p>
+    </div>
+
+    <span class="badge">HR ANALYTICS</span>
+</header>
+
+<main>
+
+    <section class="cards">
+
+        <div class="card">
+            <p>Total Employees</p>
+            <h2 id="total">0</h2>
+        </div>
+
+        <div class="card">
+            <p>Active Employees</p>
+            <h2 id="active">0</h2>
+        </div>
+
+        <div class="card">
+            <p>Employees Left</p>
+            <h2 id="left">0</h2>
+        </div>
+
+        <div class="card">
+            <p>Attrition Rate</p>
+            <h2 id="rate">0%</h2>
+        </div>
+
+    </section>
+
+
+    <section class="charts">
+
+        <div class="panel">
+            <h3>Department-wise Attrition</h3>
+            <canvas id="departmentChart"></canvas>
+        </div>
+
+        <div class="panel">
+            <h3>Reasons for Leaving</h3>
+            <canvas id="reasonChart"></canvas>
+        </div>
+
+        <div class="panel">
+            <h3>Gender Distribution</h3>
+            <canvas id="genderChart"></canvas>
+        </div>
+
+        <div class="panel">
+            <h3>Overtime vs Attrition</h3>
+            <canvas id="overtimeChart"></canvas>
+        </div>
+
+        <div class="panel">
+            <h3>Satisfaction vs Attrition</h3>
+            <canvas id="satisfactionChart"></canvas>
+        </div>
+
+    </section>
+
+
+    <section class="panel form-panel">
+
+        <h2>Add New Employee</h2>
+
+        <form id="employeeForm">
+
+            <input type="text" id="name"
+                placeholder="Employee Name" required>
+
+            <input type="number" id="age"
+                placeholder="Age" min="18" max="65" required>
+
+            <select id="gender" required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+
+            <select id="department" required>
+                <option value="">Select Department</option>
+                <option>IT</option>
+                <option>HR</option>
+                <option>Sales</option>
+                <option>Finance</option>
+                <option>Marketing</option>
+            </select>
+
+            <input type="number" id="salary"
+                placeholder="Salary" min="1" required>
+
+            <select id="satisfaction" required>
+                <option value="">Job Satisfaction</option>
+                <option value="1">1 - Very Low</option>
+                <option value="2">2 - Low</option>
+                <option value="3">3 - Average</option>
+                <option value="4">4 - Good</option>
+                <option value="5">5 - Excellent</option>
+            </select>
+
+            <select id="overtime" required>
+                <option value="">Overtime</option>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+
+            <select id="attrition" required>
+                <option value="">Select Status</option>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+
+            <select id="reason" class="hidden">
+                <option value="">Select Leaving Reason</option>
+                <option>Low Salary</option>
+                <option>Work Pressure</option>
+                <option>Better Opportunity</option>
+                <option>Personal Reasons</option>
+                <option>No Promotion</option>
+            </select>
+
+            <button type="submit">Add Employee</button>
+
+        </form>
+
+        <p id="message"></p>
+
+    </section>
+
+
+    <section class="panel">
+
+        <h2>Employee Records</h2>
+
+        <div class="filters">
+
+            <input type="text" id="search"
+                placeholder="Search employee...">
+
+            <select id="filterDepartment">
+                <option value="">All Departments</option>
+                <option>IT</option>
+                <option>HR</option>
+                <option>Sales</option>
+                <option>Finance</option>
+                <option>Marketing</option>
+            </select>
+
+            <button id="downloadBtn">Download CSV</button>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Department</th>
+                        <th>Salary</th>
+                        <th>Attrition</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="employeeTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    Employee Attrition Data Exploration | Academic Project
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
